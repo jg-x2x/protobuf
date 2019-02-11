@@ -16,12 +16,12 @@ if(protobuf_HAVE_LD_VERSION_SCRIPT)
   set_target_properties(libprotobuf-lite PROPERTIES
     LINK_DEPENDS ${protobuf_SOURCE_DIR}/src/libprotobuf-lite.map)
 endif()
-target_link_libraries(libprotobuf-lite PRIVATE ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(libprotobuf-lite PUBLIC ${CMAKE_THREAD_LIBS_INIT})
 if(protobuf_LINK_LIBATOMIC)
-  target_link_libraries(libprotobuf-lite PRIVATE atomic)
+  target_link_libraries(libprotobuf-lite PUBLIC atomic)
 endif()
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Android")
-  target_link_libraries(libprotobuf-lite PRIVATE log)
+	target_link_libraries(libprotobuf-lite PUBLIC log)
 endif()
 target_include_directories(libprotobuf-lite PUBLIC
   $<BUILD_INTERFACE:${protobuf_SOURCE_DIR}/src>
@@ -46,3 +46,8 @@ set_target_properties(libprotobuf-lite PROPERTIES
 add_library(protobuf::libprotobuf-lite ALIAS libprotobuf-lite)
 
 target_link_libraries(libprotobuf-lite PRIVATE utf8_validity)
+
+if(ANDROID)
+  find_package(android_log REQUIRED)
+  target_link_libraries(libprotobuf-lite PUBLIC android_log::android_log)
+endif()
