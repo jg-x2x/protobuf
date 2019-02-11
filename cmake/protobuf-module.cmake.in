@@ -136,8 +136,12 @@ _protobuf_find_libraries(Protobuf protobuf)
 # The Protobuf Lite library
 _protobuf_find_libraries(Protobuf_LITE protobuf-lite)
 
+if(@protobuf_BUILD_PROTOC_BINARIES@)
+
 # The Protobuf Protoc Library
 _protobuf_find_libraries(Protobuf_PROTOC protoc)
+
+endif()
 
 if(UNIX)
   _protobuf_find_threads()
