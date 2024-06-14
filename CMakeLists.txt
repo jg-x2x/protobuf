@@ -2,6 +2,12 @@
 # to 3.26.
 cmake_minimum_required(VERSION 3.10...3.26)
 
+include(cmake/HunterGate.cmake)
+HunterGate(
+    URL "https://github.com/cpp-pm/hunter/archive/v0.25.5.tar.gz"
+    SHA1 "a20151e4c0740ee7d0f9994476856d813cdead29"
+)
+
 # Revert to old behavior for MSVC debug symbols.
 if(POLICY CMP0141)
   cmake_policy(SET CMP0141 OLD)
@@ -160,6 +166,7 @@ endif()
 
 set(_protobuf_FIND_ZLIB)
 if (protobuf_WITH_ZLIB)
+  hunter_add_package(ZLIB)
   find_package(ZLIB)
   if (ZLIB_FOUND)
     set(HAVE_ZLIB 1)
