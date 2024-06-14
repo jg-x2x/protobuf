@@ -1,6 +1,7 @@
-option(protobuf_USE_EXTERNAL_GTEST "Use external Google Test (i.e. not the one in third_party/googletest)" OFF)
+option(protobuf_USE_EXTERNAL_GTEST "Use external Google Test (i.e. not the one in third_party/googletest)" ON)
 
 if (protobuf_USE_EXTERNAL_GTEST)
+  hunter_add_package(GTest)
   find_package(GTest REQUIRED CONFIG)
 else()
   if (NOT EXISTS "${protobuf_SOURCE_DIR}/third_party/googletest/CMakeLists.txt")

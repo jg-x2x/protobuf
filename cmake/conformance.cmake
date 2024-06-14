@@ -9,6 +9,7 @@ if (protobuf_JSONCPP_PROVIDER STREQUAL "module")
             "  cmake -Dprotobuf_BUILD_CONFORMANCE=OFF\n")
   endif()
 elseif(protobuf_JSONCPP_PROVIDER STREQUAL "package")
+  hunter_add_package(jsoncpp)
   find_package(jsoncpp REQUIRED)
 endif()
 

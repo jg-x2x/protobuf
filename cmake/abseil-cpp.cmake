@@ -33,6 +33,7 @@ elseif(protobuf_ABSL_PROVIDER STREQUAL "module")
   endif()
 elseif(protobuf_ABSL_PROVIDER STREQUAL "package")
   # Use "CONFIG" as there is no built-in cmake module for absl.
+  hunter_add_package(abseil)
   find_package(absl REQUIRED CONFIG)
 endif()
 set(_protobuf_FIND_ABSL "if(NOT TARGET absl::strings)\n  find_package(absl CONFIG)\nendif()")
